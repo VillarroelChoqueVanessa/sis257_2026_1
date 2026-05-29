@@ -3,7 +3,6 @@ import { ProgramasService } from './programas.service';
 import { CreateProgramaDto } from './dto/create-programa.dto';
 import { UpdateProgramaDto } from './dto/update-programa.dto';
 
-// programas.controller.ts
 @Controller('programas')
 export class ProgramasController {
   constructor(private readonly programasService: ProgramasService) {}

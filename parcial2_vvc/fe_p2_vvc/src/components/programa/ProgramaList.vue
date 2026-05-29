@@ -77,6 +77,7 @@ defineExpose({ obtenerLista })
       <Column field="costo" header="Costo" sortable />
       <Column field="fechaInicio" header="Fecha Inicio" sortable />
       <Column field="estado" header="Estado" sortable />
+      <Column field="modalidadClases" header="Modalidad de Clases" sortable />
       <Column header="Acciones" frozen align-frozen="right" style="min-width: 120px">
         <template #body="{ data }">
           <Button icon="pi pi-pencil" aria-label="Editar" text @click="emitirEdicion(data)" />

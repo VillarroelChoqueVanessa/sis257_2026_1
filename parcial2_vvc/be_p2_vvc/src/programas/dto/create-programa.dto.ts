@@ -49,9 +49,18 @@ export class CreateProgramaDto {
   readonly fechaInicio: Date;
 
   @ApiProperty({
+    enum: ['Presencial', 'Virtual', 'Mixto'],
+  })
+  @IsNotEmpty({ message: 'El modalidad de Clases es obligatorio' })
+  @IsIn(['Presencial', 'Virtual', 'Mixto'],)
+  readonly modalidadClases: string;
+  
+  @ApiProperty({
     enum: ['En Planificación', 'En curso', 'Finalizado'],
   })
   @IsNotEmpty({ message: 'El estado es obligatorio' })
   @IsIn(['En Planificación', 'En curso', 'Finalizado'],)
   readonly estado: string;
+
+  
 }

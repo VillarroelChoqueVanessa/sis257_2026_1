@@ -28,7 +28,7 @@ const dialogVisible = computed({
 
 const nivelesAcademicos = ref<NivelAcademico[]>([])
 const estados = ['En Planificación', 'En curso', 'Finalizado']
-
+const modalidadClases = ['Presencial', 'Virtual', 'Mixto']
 const programa = ref<Programa>({ ...props.programa })
 
 async function obtenerNivelesAcademicos() {
@@ -53,6 +53,7 @@ watch(
           costo: 0,
           fechaInicio: new Date(),
           estado: 'En Planificación',
+          modalidadClases: 'Presencial',
           nivelesAcademicos: { id: 0, nombre: '', descripcion: '' },
         }
       }
@@ -71,6 +72,7 @@ async function handleSave() {
       costo: Number(programa.value.costo),
       fechaInicio: programa.value.fechaInicio,
       estado: programa.value.estado,
+      modalidadClases: programa.value.modalidadClases,
     }
     if (props.modoEdicion) {
       await http.patch(`${ENDPOINT}/${programa.value.id}`, body)
@@ -93,17 +95,6 @@ async function handleSave() {
       style="width: 30rem"
     >
       <div class="flex items-center gap-4 mb-4">
-        <label for="nivelAcademico" class="font-semibold w-4">Nivel Académico</label>
-        <Select
-          id="nivelAcademico"
-          v-model="programa.idNivelAcademico"
-          :options="nivelesAcademicos"
-          optionLabel="nombre"
-          optionValue="id"
-          class="flex-auto"
-        />
-      </div>
-      <div class="flex items-center gap-4 mb-4">
         <label for="nombre" class="font-semibold w-4">Nombre</label>
         <InputText
           id="nombre"
@@ -111,6 +102,17 @@ async function handleSave() {
           class="flex-auto"
           autocomplete="off"
           maxlength="100"
+        />
+      </div>
+      <div class="flex items-center gap-4 mb-4">
+        <label for="nivelesAcademicos" class="font-semibold w-4">Nivel Académico</label>
+        <Select
+          id="nivelesAcademicos"
+          v-model="programa.idNivelAcademico"
+          :options="nivelesAcademicos"
+          optionLabel="nombre"
+          optionValue="id"
+          class="flex-auto"
         />
       </div>
       <div class="flex items-center gap-4 mb-4">
@@ -128,7 +130,7 @@ async function handleSave() {
         <Textarea id="version" v-model="programa.version" class="flex-auto" type="number" min="1" />
       </div>
       <div class="flex items-center gap-4 mb-4">
-        <label for="duracionMeses" class="font-semibold w-4">Duración (meses)</label>
+        <label for="duracionMeses" class="font-semibold w-4">Duración meses</label>
         <InputText
           id="duracionMeses"
           v-model="programa.duracionMeses"
@@ -156,6 +158,16 @@ async function handleSave() {
         <label for="estado" class="font-semibold w-4">Estado</label>
         <Select id="estado" v-model="programa.estado" :options="estados" class="flex-auto" />
       </div>
+      <div class="flex items-center gap-4 mb-4">
+        <label for="modalidadClases" class="font-semibold w-4">Modalidad de Clases</label>
+        <Select
+          id="modalidadClases"
+          v-model="programa.modalidadClases"
+          :options="modalidadClases"
+          class="flex-auto"
+        />
+      </div>
+
       <div class="flex justify-end gap-2">
         <Button
           label="Cancelar"

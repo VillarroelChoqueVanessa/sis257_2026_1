@@ -21,10 +21,17 @@ export class Programa {
   fechaInicio: Date;
   @Column({
     type: 'enum',
+    enum: ['Presencial', 'Virtual', 'Mixto'],
+    default: 'Presencial', name: 'modalidad_clases'
+  })
+  modalidadClases: string;
+  @Column({
+    type: 'enum',
     enum: ['En Planificación', 'En curso', 'Finalizado'],
     default: 'En Planificación',
   })
   estado: string;
+  
 
   @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;

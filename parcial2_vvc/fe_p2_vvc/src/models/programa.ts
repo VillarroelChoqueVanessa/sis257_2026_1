@@ -10,5 +10,6 @@ export interface Programa {
   costo: number
   fechaInicio: Date | string
   estado: 'En Planificación' | 'En curso' | 'Finalizado'
+  modalidadClases: 'Presencial' | 'Virtual' | 'Mixto'
   nivelesAcademicos: NivelAcademico
 }
